@@ -97,7 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bSwimLeft: 1
+  isDeadly: 0
   moveSpeed: 5
+  corpse: {fileID: 6980864941252938575, guid: 582daf2a606ff35469c580fffe8a9e7c, type: 3}
 --- !u!58 &-8835665211450036771
 CircleCollider2D:
   m_ObjectHideFlags: 0

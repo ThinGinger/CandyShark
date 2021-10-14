@@ -98,6 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.05
   rotSpeed: 0.4
+  score: 0
+  lives: 3
 --- !u!50 &2429185088188913642
 Rigidbody2D:
   serializedVersion: 4

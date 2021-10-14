@@ -1,19 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     Vector3 mousePos;
+    Vector2 pos = new Vector2(0f, 0f);
     public float moveSpeed = 0.1f;
     public float rotSpeed = 0.4f;
     Rigidbody2D rb;
-    Vector2 pos = new Vector2(0f, 0f);
+
+    Text UIText;
+    public int score = 0;
+    public int lives = 3;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        UIText = FindObjectOfType<Text>();
     }
 
     // Update is called once per frame
@@ -23,6 +29,14 @@ public class Player : MonoBehaviour
         {
             MoveToMouse();
             FaceMouse();
+        }
+        UIText.GetComponent<ScoreDisplay>().setScore(score);
+        UIText.GetComponent<ScoreDisplay>().setLives(lives);
+
+        if(lives <= 0)
+        {
+            FindObjectOfType<GameManager>().gameEnd();
+            Destroy(this.gameObject);
         }
 
     }

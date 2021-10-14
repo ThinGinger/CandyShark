@@ -7,7 +7,9 @@ public class Fish : MonoBehaviour
     public bool bSwimLeft = false; // false for right, true for left
     public bool isDeadly = false;
     public float moveSpeed = 3;
-    private Vector2 screenBounds;
+    public GameObject corpse;
+
+    Vector2 screenBounds;
     SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
@@ -15,6 +17,7 @@ public class Fish : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -23,11 +26,16 @@ public class Fish : MonoBehaviour
         {
             if(isDeadly)
             {
-                Destroy(other.gameObject);
+                //lose a life / die
+                other.gameObject.GetComponent<Player>().lives--;
             }
             else
             {
                 //give points
+                other.gameObject.GetComponent<Player>().score++;
+                GameObject inst = Instantiate(corpse);
+                inst.transform.position = transform.position;
+                inst.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
             }
         }
     }
